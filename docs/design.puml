@@ -1,0 +1,27 @@
+@startuml
+title Trade ingestion and expiry
+actor Client
+participant "FastAPI" as API
+participant "TradeService" as Service
+database "SQL Database" as DB
+
+Client -> API: POST /trades
+API -> Service: store(payload)
+Service -> DB: SELECT trade FOR UPDATE
+alt maturity date is in the past
+  Service --> API: MaturedTradeError
+  API --> Client: 422 Unprocessable Entity
+else incoming version is lower
+  Service --> API: LowerVersionError
+  API --> Client: 409 Conflict
+else new, same, or higher version
+  Service -> DB: INSERT or UPDATE + COMMIT
+  API --> Client: 201 Created / 200 OK
+end
+
+loop configured interval
+  API -> Service: expire_matured()
+  Service -> DB: UPDATE expired=true\nWHERE maturity_date < today
+end
+@enduml
+
