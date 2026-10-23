@@ -1,0 +1,4 @@
+interface:
+  display_name: "Regression Test"
+  short_description: "Plan and run risk-based regression tests"
+  default_prompt: "Use $regression-test to verify that recent changes did not break existing behavior."

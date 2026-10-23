@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibecode"
+  short_description: "Implement software from a product idea"
+  default_prompt: "Use $vibecode to turn this product idea into a verified implementation."

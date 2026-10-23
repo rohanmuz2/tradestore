@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Changelog"
+  short_description: "Produce an accurate release changelog"
+  default_prompt: "Use $create-changelog to generate a changelog for the current release."

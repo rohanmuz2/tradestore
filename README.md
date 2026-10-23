@@ -65,3 +65,13 @@ Render a diagram locally with PlantUML, for example:
 ```bash
 plantuml docs/*.puml
 ```
+
+## Project-local Codex skills
+
+Reusable skills are stored in [`.agents/skills`](.agents/skills):
+
+- `$vibecode` — turn a product idea into a verified end-to-end implementation.
+- `$review-changes-pr` — review changes or pull requests for prioritized, actionable defects.
+- `$create-changelog` — produce evidence-based release notes or update a changelog.
+- `$regression-test` — run risk-based checks for unintended breakage.
+- `$functional-test` — validate behavior against requirements and acceptance criteria.

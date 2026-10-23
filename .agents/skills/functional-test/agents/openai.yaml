@@ -1,0 +1,4 @@
+interface:
+  display_name: "Functional Test"
+  short_description: "Validate behavior against requirements"
+  default_prompt: "Use $functional-test to test the requested functionality against its acceptance criteria."
