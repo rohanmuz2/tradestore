@@ -26,6 +26,7 @@ include = ["app*"]
 
 [tool.pytest.ini_options]
 addopts = "--strict-markers --cov=app --cov-report=term-missing --cov-fail-under=90"
+pythonpath = ["."]
 testpaths = ["tests"]
 
 [tool.ruff]
