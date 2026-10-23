@@ -75,3 +75,4 @@ Reusable skills are stored in [`.agents/skills`](.agents/skills):
 - `$create-changelog` — produce evidence-based release notes or update a changelog.
 - `$regression-test` — run risk-based checks for unintended breakage.
 - `$functional-test` — validate behavior against requirements and acceptance criteria.
+- `$create-prd` — turn a problem statement into a traceable, interview-ready PRD.

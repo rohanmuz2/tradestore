@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create PRD"
+  short_description: "Turn a problem statement into a clear PRD"
+  default_prompt: "Use $create-prd to turn this problem statement into an interview-ready Product Requirements Document."
