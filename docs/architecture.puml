@@ -1,0 +1,39 @@
+@startuml
+title Trade Store - Component Architecture
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+actor "Trade Producer" as Producer
+actor "Operations Client" as Operator
+
+rectangle "Trade Store Container" {
+  component "FastAPI\nREST API" as API
+  component "Pydantic\nValidation" as Validation
+  component "TradeService\nBusiness Rules" as Service
+  component "Expiry Worker" as Worker
+  component "SQLAlchemy\nPersistence" as Persistence
+}
+
+database "SQL Database\nSQLite (local)\nPostgreSQL (production)" as DB
+cloud "GitHub Actions" as CI
+artifact "GHCR Image" as Image
+
+Producer --> API : POST /trades
+Operator --> API : GET / DELETE
+API --> Validation : validate request
+API --> Service : execute use case
+Worker --> Service : expire_matured()
+Service --> Persistence : query / mutate
+Persistence --> DB : SQL transaction
+
+CI --> CI : lint + regression tests
+CI --> CI : critical vulnerability scan
+CI --> Image : publish after gates pass
+
+note right of Service
+  Lower versions rejected
+  Same/higher versions replace
+  Past maturity rejected
+end note
+@enduml
+

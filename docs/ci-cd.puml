@@ -1,0 +1,37 @@
+@startuml
+title Trade Store - CI/CD and Security Pipeline
+skinparam shadowing false
+
+start
+:Developer pushes commit\nor opens pull request;
+
+fork
+  :Install Python dependencies;
+  :Run Ruff lint checks;
+  :Run Pytest regression suite;
+  :Enforce >= 90% coverage;
+  if (Tests and quality pass?) then (yes)
+  else (no)
+    :Fail workflow;
+    stop
+  endif
+fork again
+  :Scan dependencies with Trivy;
+  if (Critical vulnerability found?) then (yes)
+    :Fail workflow;
+    stop
+  else (no)
+  endif
+end fork
+
+if (Push to main?) then (yes)
+  :Build Docker image;
+  :Authenticate to GHCR;
+  :Publish latest image;
+else (pull request)
+  :Report validation result;
+endif
+
+stop
+@enduml
+

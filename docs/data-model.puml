@@ -1,0 +1,23 @@
+@startuml
+title Trade Store - Entity Relationship Model
+hide methods
+skinparam linetype ortho
+skinparam shadowing false
+
+entity trades {
+  * trade_id : varchar(64) <<PK>>
+  --
+  version : integer <<NOT NULL>>
+  counterparty_id : varchar(64) <<NOT NULL>>
+  portfolio_id : varchar(64) <<NOT NULL>>
+  maturity_date : date <<NOT NULL, INDEX>>
+  created_date : date <<NOT NULL>>
+  expired : boolean <<NOT NULL, INDEX>>
+}
+
+note right of trades
+  One row represents the latest
+  accepted state of one trade.
+end note
+@enduml
+

@@ -48,4 +48,20 @@ docker build -t trade-store .
 
 The tests express each acceptance rule and enforce at least 90% coverage. The GitHub Actions pipeline runs linting and regression tests, scans open-source dependencies with Trivy, fails on critical vulnerabilities, then publishes the container to GitHub Container Registry on successful pushes to `main`.
 
-The PlantUML sequence/design diagram is in [`docs/design.puml`](docs/design.puml).
+## Interview and design documentation
+
+The [Product Requirements Document](docs/PRD.md) provides an interview-ready walkthrough of the problem, requirements, API contract, architecture, TDD process, delivery pipeline, design decisions, risks, and roadmap.
+
+PlantUML sources:
+
+- [Ingestion and expiry sequence](docs/design.puml)
+- [Component architecture](docs/architecture.puml)
+- [Class diagram](docs/class-diagram.puml)
+- [Database model](docs/data-model.puml)
+- [CI/CD and security pipeline](docs/ci-cd.puml)
+
+Render a diagram locally with PlantUML, for example:
+
+```bash
+plantuml docs/*.puml
+```

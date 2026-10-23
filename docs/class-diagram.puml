@@ -1,0 +1,62 @@
+@startuml
+title Trade Store - Class Diagram
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class Trade {
+  +trade_id: str
+  +version: int
+  +counterparty_id: str
+  +portfolio_id: str
+  +maturity_date: date
+  +created_date: date
+  +expired: bool
+}
+
+class TradeIn {
+  +trade_id: str
+  +version: int
+  +counterparty_id: str
+  +portfolio_id: str
+  +maturity_date: date
+  +created_date: date?
+}
+
+class TradeOut
+class TradeWriteResult {
+  +operation: str
+  +trade: TradeOut
+}
+
+class TradeService {
+  -session: Session
+  -today: Callable
+  +store(payload: TradeIn): (Trade, str)
+  +get(trade_id: str): Trade?
+  +list(include_expired: bool): list[Trade]
+  +delete(trade_id: str): bool
+  +expire_matured(): int
+}
+
+class LowerVersionError {
+  +trade_id: str
+  +received: int
+  +current: int
+}
+
+class MaturedTradeError {
+  +maturity_date: date
+  +today: date
+}
+
+class Session
+
+TradeService --> Session : uses
+TradeService --> Trade : persists
+TradeService ..> TradeIn : accepts
+TradeService ..> LowerVersionError : raises
+TradeService ..> MaturedTradeError : raises
+TradeOut ..> Trade : maps from
+TradeWriteResult *-- TradeOut
+@enduml
+
